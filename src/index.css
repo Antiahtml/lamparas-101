@@ -1,0 +1,335 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-paper: #eee4ce;
+  --color-paper-deep: #e3d5b6;
+  --color-card: #f8f2e4;
+  --color-ink: #2a2016;
+  --color-ink-2: #6b5a45;
+  --color-line: #cdbb97;
+  --color-ply: #d9a574;
+  --color-pine: #efd29c;
+  --color-accent: #2f6b4f;
+  --color-accent-soft: #d9e7dc;
+  --color-cota: #2d5b8a;
+  --color-glow: #ffc94d;
+  --color-no: #b5452e;
+  --font-sans: 'Archivo', system-ui, sans-serif;
+  --font-hand: 'Kalam', 'Comic Sans MS', cursive;
+}
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--color-cota);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.wide {
+  font-variation-settings: 'wdth' 118;
+}
+
+}
+
+@layer components {
+/* --- escenario: papel cuadriculado de taller --- */
+.stage {
+  background-color: var(--color-paper);
+  background-image:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 250, 238, 0.9), rgba(238, 228, 206, 0) 65%),
+    linear-gradient(rgba(150, 120, 80, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 120, 80, 0.12) 1px, transparent 1px),
+    linear-gradient(rgba(150, 120, 80, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(150, 120, 80, 0.06) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    80px 80px,
+    80px 80px,
+    16px 16px,
+    16px 16px;
+}
+
+/* --- etiquetas 3D --- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  padding: 3px 9px 3px 4px;
+  border-radius: 999px;
+  background: var(--color-card);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 0 2px 0 var(--color-ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: none;
+  user-select: none;
+}
+.tag:not(:has(.tag-n)) {
+  padding-left: 9px;
+}
+.tag-n {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-card);
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+.tag-s {
+  font-weight: 400;
+  color: var(--color-ink-2);
+}
+.tag-accent {
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 0 var(--color-accent);
+}
+.tag-accent .tag-n {
+  background: var(--color-accent);
+}
+.tag-glow {
+  background: #fff3cf;
+  border-color: #b98a1c;
+  box-shadow: 0 2px 0 #b98a1c;
+}
+
+.dim {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--color-cota);
+  background: rgba(248, 242, 228, 0.9);
+  padding: 0 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.hole-tag {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 5px;
+  background: var(--color-cota);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  user-select: none;
+}
+.hole-tag.is-prov {
+  background: var(--color-no);
+}
+.chip {
+  white-space: nowrap;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(248, 242, 228, 0.92);
+  border: 1px solid var(--color-line);
+  user-select: none;
+  transition: opacity 0.2s;
+}
+.chip-ok {
+  border-color: var(--color-accent);
+}
+
+.tray-label {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 20px;
+  white-space: nowrap;
+  color: var(--color-ink);
+  user-select: none;
+}
+.tray-label span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-card);
+  font-size: 14px;
+}
+.tray-label.is-tool span {
+  background: var(--color-accent);
+}
+
+/* --- controles --- */
+.tool-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  transition: background 0.15s;
+}
+.tool-btn:hover:not(:disabled) {
+  background: var(--color-paper-deep);
+}
+.tool-btn[aria-pressed='true'] {
+  background: var(--color-ink);
+  color: var(--color-card);
+}
+.tool-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.raised {
+  background: var(--color-card);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 0 3px 0 var(--color-ink);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-card);
+  box-shadow: 0 2px 0 var(--color-ink);
+  transition:
+    transform 0.08s,
+    box-shadow 0.08s;
+}
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-ink);
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-quiet {
+  border-color: transparent;
+  box-shadow: none;
+  background: transparent;
+}
+.btn-quiet:hover {
+  background: var(--color-paper-deep);
+}
+
+/* esquema eléctrico */
+.wire {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.flow {
+  fill: none;
+  stroke: var(--color-glow);
+  stroke-width: 4;
+  stroke-dasharray: 2 14;
+  stroke-linecap: round;
+  animation: flow 0.9s linear infinite;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+.sym {
+  cursor: pointer;
+}
+.sym:hover .sym-hit {
+  fill: rgba(47, 107, 79, 0.1);
+}
+.sym-hit {
+  fill: transparent;
+  transition: fill 0.15s;
+}
+.sym.is-sel .sym-hit {
+  fill: rgba(47, 107, 79, 0.16);
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
+}
+
+/* loader */
+.loader-lamp rect,
+.loader-lamp path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 1.6s ease-in-out infinite alternate;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+input[type='range'].scrub {
+  appearance: none;
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(to right, var(--color-accent) var(--p, 0%), var(--color-paper-deep) var(--p, 0%));
+}
+input[type='range'].scrub::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-card);
+  border: 2px solid var(--color-ink);
+}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .loader-lamp rect,
+  .loader-lamp path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
